@@ -5,8 +5,6 @@
 #import the os and CSV Python modules
 import os
 import csv
-import datetime
-import time
 
 #create os path to csv resource file
 csvpath = os.path.join("", "Resources", "budget_data.csv")
@@ -49,6 +47,14 @@ indexGdecrease = momDifList.index(Gdecrease)
 GincreaseMon = monthYear[indexGincrease + 1]
 GdecreaseMon = monthYear[indexGdecrease + 1]
 
+#This is my solution to reformat the date to MMM-YYYY. Could not get the date formatter to work but this was a fun alternative :)
+splitI = GincreaseMon.split("-")
+splitIM = splitI[1]
+splitIY = splitI[0]
+
+splitD = GdecreaseMon.split("-")
+splitDM = splitD[1]
+splitDY = splitD[0]
 
 #use the total of the difference list divided by the length of the difference list to get the average change
 aveChange = sum(momDifList) / len(momDifList)   
@@ -60,8 +66,8 @@ print("------------------------------")
 print("Total Months: " + str(num_months))
 print("Total: $" + str(totalNet))
 print("Average Change: $" + str(round(aveChange, 2)))
-print("Greatest Increase in Profits: " + GincreaseMon + "($" + str(Gincrease) + ")")
-print("Greatest Decrease in Profits: " + GdecreaseMon + "($" + str(Gdecrease) + ")")
+print("Greatest Increase in Profits: " + splitIM + "-20" + splitIY + " ($" + str(Gincrease) + ")")
+print("Greatest Decrease in Profits: " + splitDM + "-20" + splitDY + " ($" + str(Gdecrease) + ")")
 
 #output summary to txt file 
 text_file = open("Output.txt", "w")
@@ -70,6 +76,6 @@ text_file.write(f'------------------------------\n')
 text_file.write(f'Total Months: {str(num_months)}\n')
 text_file.write(f'Total: $ {str(totalNet)}\n')
 text_file.write(f'Average Change: $ {str(round(aveChange, 2))}\n')
-text_file.write(f'Greatest Increase in Profits: {GincreaseMon} (${str(Gincrease)})\n')
-text_file.write(f'Greatest Decrease in Profits: {GdecreaseMon} (${str(Gdecrease)})\n')
+text_file.write(f'Greatest Increase in Profits: {splitIM}-20{splitIY} (${str(Gincrease)})\n')
+text_file.write(f'Greatest Decrease in Profits: {splitDM}-20{splitDY} (${str(Gdecrease)})\n')
 text_file.close()
