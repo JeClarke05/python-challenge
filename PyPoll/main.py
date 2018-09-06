@@ -9,7 +9,7 @@ import csv
 #create os path to csv resource file
 csvpath = os.path.join("", "Resources", "election_data.csv")
 
-#Create variables to track changes
+#Create lists to hold csv data 
 candidate = []
 uniqueCandidate = []
 can1List = []
@@ -55,21 +55,33 @@ can2Count = len(can2List)
 can3Count = len(can3List)
 can4Count = len(can4List)
 
-can1Percent = (float(can1Count) / float(num_of_votes)) * 100
-can2Percent = (float(can2Count) / float(num_of_votes)) * 100
-can3Percent = (float(can3Count) / float(num_of_votes)) * 100
-can4Percent = (float(can4Count) / float(num_of_votes)) * 100
+#calculate Percentage of votes for each canidate
+can1Percent = (float(can1Count) / float(num_of_votes))
+can2Percent = (float(can2Count) / float(num_of_votes))
+can3Percent = (float(can3Count) / float(num_of_votes))
+can4Percent = (float(can4Count) / float(num_of_votes))
+
+#Calculate Winner based on popular vote
+winner = 0
+if can1Count >= winner:
+    winner = can1
+elif can2Count >= winner:
+    winner = can2
+elif can3Count >= winner:
+    winner = can3
+elif can4Count >= winner:
+    winner = can4
+
 
 #Print Summary Table
-
 print("Election Results")
 print("-----------------------")
 print("Total Votes: " + str(num_of_votes))
 print("-----------------------")
-print(can1 + ":" + str(round(can1Percent, 3 )) + "% " + "("+ str(can1Count) + ")")
-print(can2 + ":" + str(round(can2Percent, 3)) + "% " + "("+ str(can2Count) + ")")
-print(can3 + ":" + str(round(can3Percent, 3)) + "% " + "("+ str(can3Count) + ")")
-print(can4 + ":" + str(round(can4Percent, 3)) + "% " + "("+ str(can4Count) + ")")
+print(can1 + ":" + str("{:.3%}".format(can1Percent)) + "("+ str(can1Count) + ")")
+print(can2 + ":" + str("{:.3%}".format(can2Percent)) + "("+ str(can2Count) + ")")
+print(can3 + ":" + str("{:.3%}".format(can3Percent)) + "("+ str(can3Count) + ")")
+print(can4 + ":" + str("{:.3%}".format(can4Percent)) + "("+ str(can4Count) + ")")
 print("-----------------------")
-
+print("WInner: " + winner)
 print("-----------------------")
